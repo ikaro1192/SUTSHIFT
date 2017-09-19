@@ -8,19 +8,19 @@
 
 /*********************** self documentation **********************/
 char *sdoc[] = {
-" 								",
-" SUTSHIFT - do shift each trace of su data in the t direction 		",
-" 								",
-" sutshift <stdin >stdout tfile=					",
-" 								",
-" Required parameters:						",
-"   tfile=     file name 							",
-"								",
-" Optional parameter:						",
-"   None                                    ",
-"								",
-" Note:								",
-NULL};
+    " 								",
+    " SUTSHIFT - do shift each trace of su data in the t direction 		",
+    " 								",
+    " sutshift <stdin >stdout tfile=					",
+    " 								",
+    " Required parameters:						",
+    "   tfile=     file name 							",
+    "								",
+    " Optional parameter:						",
+    "   None                                    ",
+    "								",
+    " Note:								",
+    NULL};
 
 /**************** end self doc ***********************************/
 
@@ -33,21 +33,21 @@ int limit(int val, int under, int upper){
 }
 
 int main(int argc, char **argv) {
-	cwp_String t_filename="";
-	int nt;			/* number of samples on input trace	*/
+    cwp_String t_filename="";
+    int nt;			/* number of samples on input trace	*/
     int dt;         /* sample interval; in micro-seconds */
     FILE *tfile;
     int shiftVal = 0;
 
 
-	/* Initialize */
-	initargs(argc, argv);
-	requestdoc(1);
+    /* Initialize */
+    initargs(argc, argv);
+    requestdoc(1);
 
 
-	/* Get information from first trace */
-	if (!gettr(&tr)) err("can't get first trace");
-	nt = tr.ns;
+    /* Get information from first trace */
+    if (!gettr(&tr)) err("can't get first trace");
+    nt = tr.ns;
     dt = tr.dt;
 
     if (!getparstring("tfile", &t_filename)) err("tfile is not set");
@@ -55,11 +55,11 @@ int main(int argc, char **argv) {
         err("error: can't read file.");
     }
 
-	/* Main loop over traces */
-	do {
+    /* Main loop over traces */
+    do {
 
         fscanf(tfile, "%d", &shiftVal);
-        fprintf(stderr,"%d\n",shiftVal);
+        shiftVal = shiftVal/dt;
 
         if (shiftVal < 0){
             for (int i = 0; i < nt; ++i){
@@ -80,8 +80,8 @@ int main(int argc, char **argv) {
         }
         puttr(&tr);
 
-	} while (gettr(&tr));
+    } while (gettr(&tr));
 
 
-	return(CWP_Exit());
+    return(CWP_Exit());
 }

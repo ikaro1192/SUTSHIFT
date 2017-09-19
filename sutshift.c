@@ -9,7 +9,7 @@
 /*********************** self documentation **********************/
 char *sdoc[] = {
 " 								",
-" SUTSHIFT - do math operation on su data 		",
+" SUTSHIFT - do shift each trace of su data in the t direction 		",
 " 								",
 " sutshift <stdin >stdout tfile=					",
 " 								",
